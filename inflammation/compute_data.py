@@ -45,12 +45,7 @@ def analyse_data(data_source):
     means_by_day_matrix = np.stack(list(means_by_day))
 
     daily_standard_deviation = np.std(means_by_day_matrix, axis=0)
-
-    graph_data = {
-        'standard deviation by day': daily_standard_deviation,
-    }
-    views.visualize(graph_data)
-    return 0
+    return daily_standard_deviation
 
 if __name__ == '__main__':
     data_dir=r"C:\\Users\\3048844\\OneDrive - Queen's University Belfast\\Documents\\cursos\\archer4\\archer2\\data\\"
