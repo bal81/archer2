@@ -53,7 +53,7 @@ def analyse_data(data_source):
     return 0
 
 if __name__ == '__main__':
-    data_dir=r"C:\\Users\\3048844\\OneDrive - Queen's University Belfast\\Documents\\cursos\\archer4\\archer2\\data"
+    data_dir=r"C:\\Users\\3048844\\OneDrive - Queen's University Belfast\\Documents\\cursos\\archer4\\archer2\\data\\"
     infiles=data_dir+"inflammation-01.csv"
     _, extension = os.path.splitext(infiles)
     print('=======================')
@@ -61,9 +61,9 @@ if __name__ == '__main__':
     print('data_dir= ', data_dir)
     print('=======================')
     if extension == '.json':
-        data_source = JSONDataSource(os.path.dirname(data_dir))
+        data_source = JSONDataSource(os.path.dirname(infiles))
     elif extension == '.csv':
-        data_source = CSVDataSource(os.path.dirname(data_dir))
+        data_source = CSVDataSource(os.path.dirname(infiles))
     else:
         raise ValueError(f'Unsupported data file format: {extension}')
     analyse_data(data_source)
