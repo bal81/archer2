@@ -16,8 +16,7 @@ def visualize(data_dict):
     fig = plt.figure(figsize=((3 * num_plots) + 1, 3.0))
 
     for i, (name, data) in enumerate(data_dict.items()):
-        df=pd.read_csv(data)
-        print(df.describe())
+        print('reading file= ', name)
         axes = fig.add_subplot(1, num_plots, i + 1)
 
         axes.set_ylabel(name)
