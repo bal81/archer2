@@ -19,6 +19,21 @@ class CSVDataSource:
         data = map(models.load_csv, data_file_paths)
         return data
 
+class JSONDataSource:
+  """
+  Loads patient data with inflammation values from JSON files within a specified folder.
+  """
+  def __init__(self, dir_path):
+    self.dir_path = dir_path
+
+  def load_inflammation_data(self):
+    data_file_paths = glob.glob(os.path.join(self.dir_path, 'inflammation*.json'))
+    if len(data_file_paths) == 0:
+      raise ValueError(f"No inflammation JSON files found in path {self.dir_path}")
+    data = map(models.load_json, data_file_paths)
+    return list(data)
+  
+
 def analyse_data(data_source):
     """Calculates the standard deviation by day between datasets.
 
@@ -39,5 +54,18 @@ def analyse_data(data_source):
 
 if __name__ == '__main__':
     data_dir=r"C:\\Users\\3048844\\OneDrive - Queen's University Belfast\\Documents\\cursos\\archer4\\archer2\\data"
-    data_source=CSVDataSource(data_dir) 
+    infiles=data_dir+"inflammation-01.csv"
+    _, extension = os.path.splitext(infiles)
+    print('=======================')
+    print('reading files with extension= ', extension)
+    print('data_dir= ', data_dir)
+    print('=======================')
+    if extension == '.json':
+        data_source = JSONDataSource(os.path.dirname(data_dir))
+    elif extension == '.csv':
+        data_source = CSVDataSource(os.path.dirname(data_dir))
+    else:
+        raise ValueError(f'Unsupported data file format: {extension}')
     analyse_data(data_source)
+    #data_source=CSVDataSource(data_dir) 
+    #analyse_data(data_source)
